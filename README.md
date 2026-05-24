@@ -6,11 +6,12 @@
 
 ## Team Members
 
-| Name | |
-|---|---|
-| Xuyang Chen | Xinghao Huang |
-| Kaiyue Wang | Yiwen Wang |
-| Junyi Yao | Boyi Zhang |
+- Xuyang Chen
+- Xinghao Huang
+- Kaiyue Wang
+- Yiwen Wang
+- Junyi Yao
+- Boyi Zhang
 
 ---
 
