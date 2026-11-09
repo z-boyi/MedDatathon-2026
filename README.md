@@ -128,13 +128,19 @@ Two domain-informed composite features created:
 
 ### Model Results
 
-| Model | Macro F1 Score |
-|---|---|
-| DummyClassifier (baseline) | ~0.34 |
-| Logistic Regression | ~0.64 |
-| Random Forest | — |
-| XGBoost | — |
-| **LightGBM (tuned)** | **Best** |
+5-fold cross-validation on the training split (70%), mean ± std:
+
+| Model | CV Macro F1 | CV Accuracy | Train Macro F1 |
+|---|---|---|---|
+| DummyClassifier (baseline) | 0.343 ± 0.048 | 0.363 ± 0.049 | 0.347 |
+| Logistic Regression | 0.639 ± 0.026 | 0.663 ± 0.031 | 0.722 |
+| Random Forest | 0.650 ± 0.041 | 0.686 ± 0.038 | 1.000 |
+| XGBoost | 0.648 ± 0.041 | 0.674 ± 0.037 | 1.000 |
+| LightGBM | 0.637 ± 0.040 | 0.661 ± 0.038 | 1.000 |
+| Logistic Regression (tuned) | 0.654 ± 0.044 | 0.685 ± 0.051 | 0.684 |
+| Random Forest (tuned) | 0.659 ± 0.047 | 0.688 ± 0.044 | 0.927 |
+| XGBoost (tuned) | 0.651 ± 0.062 | 0.682 ± 0.056 | 0.945 |
+| **LightGBM (tuned)** | **0.660 ± 0.061** | 0.686 ± 0.054 | 0.889 |
 
 ---
 
