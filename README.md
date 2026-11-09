@@ -21,7 +21,7 @@ This end-to-end machine learning project investigates whether models can predict
 
 **Key metrics:**
 - **Dataset:** 920 patient records, 16 clinical features, 3 target classes
-- **Best model:** Tuned LightGBM
+- **Best model:** Tuned LightGBM (CV macro F1 0.660 vs. 0.343 baseline)
 - **Primary metric:** Macro F1 score (optimized for multiclass imbalance)
 - **Top predictors:** ST depression, chest pain type, age, exercise-induced angina
 
@@ -116,15 +116,15 @@ Two domain-informed composite features created:
 | Model | Type | Purpose |
 |---|---|---|
 | **DummyClassifier** | Baseline | Stratified random baseline for comparison |
-| **Logistic Regression** | Linear model | Linear baseline; surprisingly strong (~0.64 macro F1) |
+| **Logistic Regression** | Linear model | Linear baseline; surprisingly strong (0.654 macro F1 after tuning) |
 | **Random Forest** | Ensemble | Captures non-linear patterns, handles feature interactions |
 | **XGBoost** | Gradient boosting | Sequential optimization with regularization |
-| **LightGBM (tuned)** | Gradient boosting | **Best performer**; optimized hyperparameters via grid search |
+| **LightGBM (tuned)** | Gradient boosting | Highest CV macro F1 (0.660) after randomized search |
 
 **Evaluation methodology:**
 - Primary metric: **Macro F1 score** (unweighted average across 3 classes; handles imbalance)
-- Cross-validation: stratified k-fold (specific folds in notebooks)
-- Hyperparameter tuning: grid search with cross-validation for LightGBM
+- Cross-validation: 5-fold stratified CV on a 70/30 train/test split
+- Hyperparameter tuning: `RandomizedSearchCV` for Logistic Regression, Random Forest, LightGBM and XGBoost
 
 ### Model Results
 
@@ -141,6 +141,11 @@ Two domain-informed composite features created:
 | Random Forest (tuned) | 0.659 ± 0.047 | 0.688 ± 0.044 | 0.927 |
 | XGBoost (tuned) | 0.651 ± 0.062 | 0.682 ± 0.056 | 0.945 |
 | **LightGBM (tuned)** | **0.660 ± 0.061** | 0.686 ± 0.054 | 0.889 |
+
+**Takeaways:**
+- All models beat the baseline by a wide margin (~0.34 → ~0.65 macro F1).
+- Untuned tree ensembles overfit heavily (train F1 = 1.0 vs. ~0.65 CV). Hyperparameter tuning reduced the gap (e.g. LightGBM train F1 0.89) while slightly improving CV F1.
+- Differences between the tuned models (0.651–0.660) are within one standard deviation, so tuned Logistic Regression is a competitive, more interpretable alternative to the boosted models. Tuned LightGBM was selected for the final model and SHAP analysis.
 
 ---
 
